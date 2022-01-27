@@ -1,0 +1,22 @@
+import com.idat.demodrools.model.Modulo;
+
+rule "Tasa de interés FD para la duración de Interbank de más de 1 año y menos de 2 años"
+	when	
+		fdObject : Modulo(banco=="Interbank" && tiempo >= 1 && tiempo < 2);
+	then
+		fdObject.setTasa("3%");
+end;
+
+rule "Tasa de interés FD para Continental por una duración mayor o igual a 2 años"
+	when
+		fdObject : Modulo(banco=="Continental" && tiempo >= 2);
+	then
+		fdObject.setTasa("6%");
+end;
+
+rule "Tasa de interés FD para ScotiaBank por una duración mayor o igual a 3 año"
+	when
+		fdObject : Modulo(banco=="ScotiaBank" && tiempo >= 3);
+	then
+		fdObject.setTasa("3%");
+end;
